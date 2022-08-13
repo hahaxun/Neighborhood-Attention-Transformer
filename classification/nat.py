@@ -1,8 +1,15 @@
+"""
+Neighborhood Attention Transformer.
+https://arxiv.org/abs/2204.07143
+
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+"""
 import torch
 import torch.nn as nn
-from timm.models.layers import trunc_normal_, DropPath, to_2tuple
+from timm.models.layers import trunc_normal_, DropPath
 from timm.models.registry import register_model
-from cuda.natten import NeighborhoodAttention
+from natten import NeighborhoodAttention
 
 
 model_urls = {

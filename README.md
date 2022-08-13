@@ -19,6 +19,38 @@ Picsart AI Research (PAIR)<sup>[2]</sup>, and Meta/Facebook AI<sup>[3]</sup>
 ![NAT-Intro](assets/intro_light.png#gh-light-mode-only)
 
 
+# News
+
+### July 9, 2022
+* [NA CUDA extension v0.12](NATTEN.md) released.
+  * NA runs much more efficiently now, up to 40% faster and uses up to 25% less memory compared to Swin Transformer’s Shifted Window Self Attention.
+  * Improved FP16 throughput.
+  * Improved training speed and stability.
+  * See [changelog](CHANGELOG.md).
+
+![V012](assets/v012dark.png#gh-dark-mode-only) ![V012](assets/v012light.png#gh-light-mode-only)
+![V012](assets/kernelmemory_dark.png#gh-dark-mode-only) ![V012](assets/kernelmemory_light.png#gh-light-mode-only)
+
+
+### May 12, 2022
+* [1-D Neighborhood Attention](NATTEN.md) support added!
+* Moved the kernel to `natten/` now, since there's a single version for all three tasks, and we're adding more features to the extension.
+
+### April 30, 2022
+* [NA CUDA extension v0.11](NATTEN.md) released.
+  * It's faster in both training and inference, 
+  * with a single version for all three tasks (no downstream-specific version)
+* [PyTorch implementation](NATTEN.md) released
+  * Works both with and without CUDA, but not very efficient. Try to use the CUDA extension when possible.
+  * See [changelog](CHANGELOG.md).
+
+# Catalog
+- [x] Neighborhood Attention 1D (CUDA)
+- [x] Neighborhood Attention 2D (CUDA)
+- [x] Neighborhood Attention 2D (PyTorch)
+- [ ] Zeros/Valid padding support
+- [ ] HuggingFace Demo
+
 # Abstract
 ![NAT-Arch](assets/model_dark.png#gh-dark-mode-only)
 ![NAT-Arch](assets/model_light.png#gh-light-mode-only)
@@ -45,7 +77,7 @@ NAT-Tiny reaches 83.2% top-1 accuracy on ImageNet with only
 ![computeplot_light](assets/computeplot_light.png#gh-light-mode-only)
 
 # How it works
-Natural Attention localizes the query's (red) receptive field to its nearest neighborhood (green). 
+Neighborhood Attention localizes the query's (red) receptive field to its nearest neighborhood (green). 
 This is equivalent to dot-product self attention when the neighborhood size is identical to the image dimensions. 
 Note that the edges are special (edge) cases.
 
@@ -53,9 +85,10 @@ Note that the edges are special (edge) cases.
 ![720p_fast_lm](assets/720p_fast_lm.gif#gh-light-mode-only)
 
 ## Implementation
-We wrote a [PyTorch CUDA extension](classification/cuda/README.md) to parallelize NA. 
+We wrote a [PyTorch CUDA extension](NATTEN.md) to parallelize NA. 
 It's relatively fast, very memory-efficient, and supports half precision.
 There's still a lot of room for improvement, so feel free to open PRs and contribute!
+We've also released a [pure-torch version of Neighborhood Attention](NATTEN.md) recently.
 
 # Results and checkpoints
 

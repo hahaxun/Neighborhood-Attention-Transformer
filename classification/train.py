@@ -43,7 +43,8 @@ from timm.scheduler import *
 from timm.utils import ApexScaler, NativeScaler
 
 from nat import *
-from extras import get_gflops, get_mparams
+from natten.extras import get_imagenet_gflops as get_gflops
+from natten.extras import get_mparams
 
 import yaml
 import builtins as __builtin__
@@ -654,13 +655,13 @@ def main(args):
 
         if args.log_wandb:
             if has_wandb:
-                wandb.init(entity='compactdonut',
-                           id=args.experiment,
-                           project=args.project,
-                           name=args.model,
-                           config=args,
-                           resume=bool(args.resume)
-                           )
+                wandb.init(
+                    id=args.experiment,
+                    project=args.project,
+                    name=args.model,
+                    config=args,
+                    resume=bool(args.resume)
+                )
             else:
                 builtin_print("You've requested to log metrics to wandb but package not found. "
                                 "Metrics not being logged to wandb, try `pip install wandb`")
